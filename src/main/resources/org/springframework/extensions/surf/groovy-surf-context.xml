@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Register the Groovy script processor -->
+	<bean id="webframework.registrar.groovyscriptprocessor" class="org.springframework.extensions.surf.ScriptProcessorRegistrar" init-method="init">
+		<property name="factory">
+			<bean class="org.springframework.extensions.webscripts.processor.GroovyScriptProcessorFactory" />
+		</property>
+	</bean>
+	
+	<!-- Register the Groovy template processor -->
+	<!--
+	<bean id="webframework.registrar.groovytemplateprocessor" class="org.springframework.extensions.surf.TemplateProcessorRegistrar" init-method="init">
+		<property name="factory">
+			<bean class="org.springframework.extensions.webscripts.processor.GroovyTemplateProcessorFactory">
+				<property name="defaultEncoding"><value>UTF-8</value></property>
+				<property name="scriptProcessorFactory">
+					<bean class="org.springframework.extensions.webscripts.processor.GroovyScriptProcessorFactory" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	-->
+
+</beans>
