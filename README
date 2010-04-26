@@ -1,0 +1,15 @@
+Clojure script processor for Spring Surf
+
+Spring Surf is a view composition framework for Spring MVC that plugs into your existing Spring applications.
+It provides a scriptable and content-centric approach to building web applications.
+
+This extension provides a Clojure script processor that makes it possible to implement Clojure controllers
+for your Spring Surf web scripts.
+
+Usage:
+
+controller.clj:
+(assoc! model :keyword value)
+
+view.ftl:
+Result is: ${keyword}
