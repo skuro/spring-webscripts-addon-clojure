@@ -18,12 +18,11 @@
 
 package org.springframework.extensions.webscripts.processor;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Writer;
+import java.io.*;
 import java.util.Map;
 
+import clojure.lang.*;
+import clojure.lang.Compiler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.surf.core.scripts.ScriptException;
@@ -34,6 +33,9 @@ import org.springframework.extensions.webscripts.ScriptContent;
  */
 public class ClojureScriptProcessor extends AbstractScriptProcessor
 {
+    public static final Namespace WEBSCRIPT_NS = Namespace.findOrCreate(Symbol.intern("spring.surf.webscript"));
+    public static final Var CURRENT_WEBSCRIPT_NS = Var.intern (WEBSCRIPT_NS, Symbol.create("*wsns*"), WEBSCRIPT_NS);
+    
 	private static final Log logger = LogFactory.getLog(ClojureScriptProcessor.class);
 	    
     /* (non-Javadoc)
@@ -76,11 +78,50 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
 //			}
 //			binding.setProperty("out", out);
 //			script.setBinding(binding);
+            Associative mappings = PersistentHashMap.EMPTY;
+            mappings = mappings.assoc(ClojureScriptProcessor.CURRENT_WEBSCRIPT_NS, ClojureScriptProcessor.WEBSCRIPT_NS);
+
+            for (Map.Entry<String, ? extends Object> e : model.entrySet())
+            {
+                // TODO: provide a Clojure integration layer
+                String varName = e.getKey();
+                Symbol sym = Symbol.intern(varName);
+                Var var = Var.intern(ClojureScriptProcessor.WEBSCRIPT_NS, sym);
+                mappings = mappings.assoc(var, e.getValue());
+            }
+            Var.pushThreadBindings(mappings);
+
             return clojure.lang.Compiler.load(new InputStreamReader(is));
         }
         catch (Exception exception)
         {
-            throw new ScriptException("Error executing groovy script", exception);
+            throw new ScriptException("Error executing Clojure script", exception);
+        }
+    }
+
+    public static Object runClosureScript(Map<String, ? extends Object>
+            bindings, String script)
+            throws Exception
+    {
+        try
+        {
+            new Binding<String>(script);
+            Namespace ns = (Namespace) clojure.lang.RT.CURRENT_NS.get();
+            Associative mappings = PersistentHashMap.EMPTY;
+            mappings = mappings.assoc(clojure.lang.RT.CURRENT_NS, clojure.lang.RT.CURRENT_NS.get());
+            for (Map.Entry<String, ? extends Object> e : bindings.entrySet())
+            {
+                String varName = e.getKey();
+                Symbol sym = Symbol.intern(varName);
+                Var var = Var.intern(ns, sym);
+                mappings = mappings.assoc(var, e.getValue());
+            }
+            Var.pushThreadBindings(mappings);
+            return Compiler.load(new StringReader(script));
+        }
+        finally
+        {
+            Var.popThreadBindings();
         }
     }
     
@@ -96,6 +137,8 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
     public void init()
     {
         super.init();
+
+
     }
     
     /* (non-Javadoc)
