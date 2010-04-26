@@ -1,1 +1,1 @@
-VALUE: ${groovyValue}
+VALUE: ${clojureVal}

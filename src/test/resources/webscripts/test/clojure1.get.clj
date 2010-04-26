@@ -1,3 +1,5 @@
 (ns test.alfresco)
 
-"SUCCESS"
+(refer spring.surf.webscript)
+
+(assoc! model :clojureVal "SUCCESS")
