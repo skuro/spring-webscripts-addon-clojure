@@ -1,0 +1,3 @@
+(ns test.alfresco)
+
+"SUCCESS"

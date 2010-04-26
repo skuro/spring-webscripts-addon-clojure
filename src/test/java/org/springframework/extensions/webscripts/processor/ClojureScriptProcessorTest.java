@@ -28,13 +28,13 @@ import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
  * 
  * @author muzquiano
  */
-public class GroovyScriptProcessorTest extends AbstractWebScriptServerTest
+public class ClojureScriptProcessorTest extends AbstractWebScriptServerTest
 {
 	public ArrayList<String> getConfigLocations()
 	{
 		ArrayList<String> list = super.getConfigLocations();
 		
-		list.add("classpath:org/springframework/extensions/webscripts/groovy-webscripts-context.xml");
+		list.add("classpath:org/springframework/extensions/webscripts/clojure-webscripts-context.xml");
 		
 		return list;
 	}
@@ -46,7 +46,7 @@ public class GroovyScriptProcessorTest extends AbstractWebScriptServerTest
      */
     public void testGroovy1() throws Exception
     {
-    	sendRequest(new GetRequest("/test/groovy1"), 200, "VALUE: SUCCESS");
+    	sendRequest(new GetRequest("/test/clojure1"), 200, "VALUE: SUCCESS");
     }
 
     /**
@@ -54,8 +54,8 @@ public class GroovyScriptProcessorTest extends AbstractWebScriptServerTest
      * 
      * @throws Exception
      */
-    public void testGroovy2() throws Exception
-    {
-    	sendRequest(new GetRequest("/test/groovy2"), 200, "284375169639218457571964382152496873348752916796831245967143528813527694425689731");
-    }
+//    public void testGroovy2() throws Exception
+//    {
+//    	sendRequest(new GetRequest("/test/clojure2"), 200, "284375169639218457571964382152496873348752916796831245967143528813527694425689731");
+//    }
 }

@@ -1,8 +1,8 @@
 <webscript>
-  <shortname>Groovy Test 2</shortname>
-  <description>Groovy Test 2</description>
+  <shortname>Clojure Test 1</shortname>
+  <description>Clojure Test 1</description>
   <format>argument</format>
-  <url>/test/groovy2</url>
+  <url>/test/clojure1</url>
   <authentication>none</authentication>
   <transaction>required</transaction>
 </webscript>

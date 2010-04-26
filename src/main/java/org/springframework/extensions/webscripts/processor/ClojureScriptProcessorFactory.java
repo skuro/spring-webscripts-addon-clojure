@@ -28,9 +28,9 @@ import org.springframework.extensions.webscripts.ScriptProcessorFactory;
 /**
  * @author muzquiano
  */
-public class GroovyScriptProcessorFactory implements ScriptProcessorFactory, ApplicationContextAware
+public class ClojureScriptProcessorFactory implements ScriptProcessorFactory, ApplicationContextAware
 {
-	private static final Log logger = LogFactory.getLog(GroovyScriptProcessorFactory.class);
+	private static final Log logger = LogFactory.getLog(ClojureScriptProcessorFactory.class);
 	
 	protected ApplicationContext applicationContext = null;
 	
