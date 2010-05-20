@@ -99,31 +99,31 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
         }
     }
 
-    public static Object runClosureScript(Map<String, ? extends Object>
-            bindings, String script)
-            throws Exception
-    {
-        try
-        {
-            new Binding<String>(script);
-            Namespace ns = (Namespace) clojure.lang.RT.CURRENT_NS.get();
-            Associative mappings = PersistentHashMap.EMPTY;
-            mappings = mappings.assoc(clojure.lang.RT.CURRENT_NS, clojure.lang.RT.CURRENT_NS.get());
-            for (Map.Entry<String, ? extends Object> e : bindings.entrySet())
-            {
-                String varName = e.getKey();
-                Symbol sym = Symbol.intern(varName);
-                Var var = Var.intern(ns, sym);
-                mappings = mappings.assoc(var, e.getValue());
-            }
-            Var.pushThreadBindings(mappings);
-            return Compiler.load(new StringReader(script));
-        }
-        finally
-        {
-            Var.popThreadBindings();
-        }
-    }
+//    public static Object runClosureScript(Map<String, ? extends Object>
+//            bindings, String script)
+//            throws Exception
+//    {
+//        try
+//        {
+//            new Binding<String>(script);
+//            Namespace ns = (Namespace) clojure.lang.RT.CURRENT_NS.get();
+//            Associative mappings = PersistentHashMap.EMPTY;
+//            mappings = mappings.assoc(clojure.lang.RT.CURRENT_NS, clojure.lang.RT.CURRENT_NS.get());
+//            for (Map.Entry<String, ? extends Object> e : bindings.entrySet())
+//            {
+//                String varName = e.getKey();
+//                Symbol sym = Symbol.intern(varName);
+//                Var var = Var.intern(ns, sym);
+//                mappings = mappings.assoc(var, e.getValue());
+//            }
+//            Var.pushThreadBindings(mappings);
+//            return Compiler.load(new StringReader(script));
+//        }
+//        finally
+//        {
+//            Var.popThreadBindings();
+//        }
+//    }
     
 
 //    public Object executeClojureString(String script, Map<String, Object> model)
