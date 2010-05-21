@@ -24,7 +24,7 @@ public class ClojureScriptProcessorTest extends AbstractWebScriptServerTest
         }
         catch (ServletException e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         proc = new ClojureScriptProcessor();
