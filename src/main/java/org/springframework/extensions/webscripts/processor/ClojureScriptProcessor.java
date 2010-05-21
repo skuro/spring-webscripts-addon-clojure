@@ -63,6 +63,7 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
      * @param model the context model for the script
      * @return Object   the return result of the executed script
      */
+    @SuppressWarnings (value="unchecked")
     private Object executeClojureScript(InputStream is, Writer out, Map<String, Object> model)
     {
         log.debug("Executing Clojure script");
