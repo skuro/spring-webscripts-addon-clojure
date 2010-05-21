@@ -1,61 +1,58 @@
-/**
- * Copyright (C) 2005-2009 Alfresco Software Limited.
- *
- * This file is part of the Spring Surf Extension project.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.springframework.extensions.webscripts.processor;
 
-import java.util.ArrayList;
-
+import clojure.lang.ITransientMap;
 import org.springframework.extensions.webscripts.AbstractWebScriptServerTest;
-import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
+
+import javax.servlet.ServletException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Unit tests for Groovy Script Processor
- * 
- * @author muzquiano
+ * @author Carlo Sciolla &lt;c.sciolla@sourcesense.com&gt;
  */
 public class ClojureScriptProcessorTest extends AbstractWebScriptServerTest
 {
+    protected ClojureScriptProcessor proc = null;
+
+    @Override
+    public void setUp ()
+    {
+        try
+        {
+            super.setUp();
+        }
+        catch (ServletException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        proc = new ClojureScriptProcessor();
+    }
+
+    @Override
 	public ArrayList<String> getConfigLocations()
 	{
 		ArrayList<String> list = super.getConfigLocations();
-		
+
 		list.add("classpath:org/springframework/extensions/webscripts/clojure-webscripts-context.xml");
-		
+
 		return list;
 	}
-	    
-    /**
-     * Clojure1 - Simple Response Test
-     * 
-     * @throws Exception
-     */
-    public void testClojure1() throws Exception
-    {
-    	sendRequest(new GetRequest("/test/clojure1"), 200, "VALUE: SUCCESS");
-    }
 
-    /**
-     * Groovy2 - Sudoko Solver Test
-     * 
-     * @throws Exception
-     */
-//    public void testGroovy2() throws Exception
-//    {
-//    	sendRequest(new GetRequest("/test/clojure2"), 200, "284375169639218457571964382152496873348752916796831245967143528813527694425689731");
-//    }
+    public void testBridgeValue ()
+    {
+        assertNotNull (proc);
+
+        Map<String, String> aMap = new HashMap<String, String>();
+        aMap.put ("key", "value");
+
+        Object result = proc.bridge(aMap);
+
+        assertTrue (result instanceof ITransientMap);
+
+        ITransientMap cljMap = (ITransientMap) result;
+        System.out.println (cljMap.count());
+        assertEquals ("value", cljMap.valAt("key"));
+    }
 }
