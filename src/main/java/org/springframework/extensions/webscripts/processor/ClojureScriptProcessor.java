@@ -77,6 +77,11 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
 
             for (Map.Entry<String, Object> e : model.entrySet())
             {
+                if ("format".equals (e.getKey()) || "atom".equals(e.getKey()))
+                {
+                    continue;
+                }
+                
                 // TODO: provide a Clojure integration layer
                 Symbol sym = Symbol.intern(e.getKey());
                 Var var = Var.intern(ClojureScriptProcessor.WEBSCRIPT_NS, sym);
@@ -90,10 +95,14 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
 
             // here we go
             Object result = clojure.lang.Compiler.load(new InputStreamReader(is));
+            if (!(result instanceof IPersistentMap))
+            {
+                throw new UnsupportedOperationException("Clojure webscript controllers must yield a map");
+            }
 
             // TODO: clojure is not currently directly feeding elements in the view model
             Map<String, Object> viewModel = (Map<String, Object>) model.get("model");
-            merge((ITransientMap) result, viewModel);
+            merge((IPersistentMap) result, viewModel);
 
             //Var.popThreadBindings();
 
@@ -105,9 +114,9 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
         }
     }
 
-    protected void merge(ITransientMap cljMap, Map<String, Object> viewModel)
+    protected void merge(IPersistentMap cljMap, Map<String, Object> viewModel)
     {
-        for (Object o : cljMap.persistent())
+        for (Object o : cljMap)
         {
             MapEntry next = (MapEntry) o;
             Keyword key = (Keyword) next.getKey();
