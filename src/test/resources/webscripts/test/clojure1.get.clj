@@ -1,3 +1,3 @@
 (ns test.alfresco)
 
-"SUCCESS"
+(assoc! model :clojureVal "SUCCESS")

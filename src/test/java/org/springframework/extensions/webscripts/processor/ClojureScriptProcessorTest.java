@@ -44,7 +44,7 @@ public class ClojureScriptProcessorTest extends AbstractWebScriptServerTest
      * 
      * @throws Exception
      */
-    public void testGroovy1() throws Exception
+    public void testClojure1() throws Exception
     {
     	sendRequest(new GetRequest("/test/clojure1"), 200, "VALUE: SUCCESS");
     }
