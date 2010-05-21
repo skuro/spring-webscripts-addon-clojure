@@ -1,5 +1,4 @@
-(ns test.alfresco)
+(ns test.alfresco
+    (:use [spring.surf.webscript]))
 
-(def model (var-get (ns-resolve 'spring.surf.webscript 'model)))
-
-(assoc! model :clojureVal "SUCCESS")
+(view-add! {:clojureVal "SUCCESS"})
