@@ -40,7 +40,7 @@ public class ClojureScriptProcessorTest extends AbstractWebScriptServerTest
 	}
 	    
     /**
-     * Groovy1 - Simple Response Test
+     * Clojure1 - Simple Response Test
      * 
      * @throws Exception
      */
