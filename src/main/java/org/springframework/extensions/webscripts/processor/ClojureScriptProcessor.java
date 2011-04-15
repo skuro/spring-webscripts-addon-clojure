@@ -21,20 +21,18 @@ package org.springframework.extensions.webscripts.processor;
 import java.io.*;
 import java.util.Map;
 
-import clojure.lang.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.surf.core.scripts.ScriptException;
 import org.springframework.extensions.webscripts.ScriptContent;
+
+import spring.surf.webscript.WebScript;
 
 /**
  * @author Carlo Sciolla &lt;carlo.sciolla@gmail.com&gt;
  */
 public class ClojureScriptProcessor extends AbstractScriptProcessor
 {
-    public static final Namespace WEBSCRIPT_NS = Namespace.findOrCreate(Symbol.intern("spring.surf.webscript"));
-    public static final Var CURRENT_WEBSCRIPT_NS = Var.intern(WEBSCRIPT_NS, Symbol.create("*wsns*"), WEBSCRIPT_NS);
-
     private static final Log log = LogFactory.getLog(ClojureScriptProcessor.class);
 
     /* (non-Javadoc)
@@ -64,49 +62,19 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
      * @return Object   the return result of the executed script
      */
     @SuppressWarnings (value="unchecked")
-    private Object executeClojureScript(InputStream is, Writer out, Map<String, Object> model)
+    protected Object executeClojureScript(InputStream is, Writer out, Map<String, Object> model)
     {
         log.debug("Executing Clojure script");
         log.debug ("This line is to get rid of an IDEA warning: " + out);
 
-        try
+
+		try
         {
-            // make available in/out paramters to the Clojure world
-            Associative mappings = PersistentHashMap.EMPTY;
-            mappings = mappings.assoc(ClojureScriptProcessor.CURRENT_WEBSCRIPT_NS, ClojureScriptProcessor.WEBSCRIPT_NS);
+            WebScript script = (WebScript)clojure.lang.Compiler.load(new InputStreamReader(is));
+			Map<String, Object> cljModel = (Map)script.eval(model);
+			setClojureViewModel(cljModel, model);
 
-            for (Map.Entry<String, Object> e : model.entrySet())
-            {
-                if ("format".equals (e.getKey()) || "atom".equals(e.getKey()))
-                {
-                    continue;
-                }
-                
-                // TODO: provide a Clojure integration layer
-                Symbol sym = Symbol.intern(e.getKey());
-                Var var = Var.intern(ClojureScriptProcessor.WEBSCRIPT_NS, sym);
-                Object bridgedValue = bridge(e.getValue());
-                mappings = mappings.assoc(var, bridgedValue);
-
-                log.debug(String.format("Included in mapping: %s -> %s", var, bridgedValue));
-            }
-
-            Var.pushThreadBindings(mappings);
-
-            // here we go
-            Object result = clojure.lang.Compiler.load(new InputStreamReader(is));
-            if (!(result instanceof IPersistentMap))
-            {
-                throw new UnsupportedOperationException("Clojure webscript controllers must yield a map");
-            }
-
-            // TODO: clojure is not currently directly feeding elements in the view model
-            Map<String, Object> viewModel = (Map<String, Object>) model.get("model");
-            merge((IPersistentMap) result, viewModel);
-
-            //Var.popThreadBindings();
-
-            return result;
+            return cljModel;
         }
         catch (Exception exception)
         {
@@ -114,55 +82,17 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
         }
     }
 
-    protected void merge(IPersistentMap cljMap, Map<String, Object> viewModel)
-    {
-        for (Object o : cljMap)
-        {
-            MapEntry next = (MapEntry) o;
-            Keyword key = (Keyword) next.getKey();
-            viewModel.put(key.getName(), next.getValue());
-
-            log.debug(String.format("Importing object in viewModel from Clojure: %s -> %s", key.getName(), next.getValue()));
-        }
-    }
-
-    protected Object bridge(Object obj)
-    {
-        // TODO: this doesn't work, think of how to map things correctly
-        if (obj instanceof Map)
-        {
-            Map otherMap = (Map) obj;
-            ITransientMap ret = PersistentHashMap.EMPTY.asTransient();
-            for (Object o : otherMap.entrySet())
-            {
-                Map.Entry e = (Map.Entry) o;
-                ret = ret.assoc(e.getKey(), e.getValue());
-            }
-
-            return ret;
-        }
-
-        // no special case, let it pass
-        return obj;
-    }
-
-    /* (non-Javadoc)
-    * @see org.springframework.extensions.webscripts.processor.AbstractScriptProcessor#init()
-    */
-
-    public void init()
-    {
-        super.init();
-
-        try
-        {
-            RT.init();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Adds the resulting model from Clojure to the view model
+	 * @param cljModel View model resulting from Clojure execution
+	 * @param model Full web script model
+	 */
+	private void setClojureViewModel(Map<String, Object> cljModel, Map<String, Object> model)
+	{
+		// TODO: verify that nothing more than updating the 'model' entry is needed here
+		Map<String, Object> viewModel = (Map<String, Object>)model.get("model");
+		viewModel.putAll(cljModel);
+	}
 
     /* (non-Javadoc)
     * @see org.springframework.extensions.webscripts.ScriptProcessor#findScript(java.lang.String)
@@ -170,6 +100,7 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
 
     public ScriptContent findScript(String path)
     {
+		// TODO: maybe check path against (ns)?
         return getScriptLoader().getScript(path);
     }
 

@@ -1,4 +1,12 @@
-(ns test.alfresco
-    (:use [spring.surf.webscript]))
+;; NOTE: any ns form would be ignored
 
-(view-add! {:clojureVal "SUCCESS"})
+(use '[spring.surf.webscript :as ws])
+
+(defrecord TestWebScript
+  []
+  
+  ws/WebScript
+  (eval [_ model]
+       (assoc (into {}  model) "clojureVal" "SUCCESS")))
+
+(TestWebScript.)

@@ -11,19 +11,5 @@
 			<bean class="org.springframework.extensions.webscripts.processor.ClojureScriptProcessorFactory" />
 		</property>
 	</bean>
-	
-	<!-- Register the Groovy template processor -->
-	<!--
-	<bean id="webframework.registrar.groovytemplateprocessor" class="org.springframework.extensions.surf.TemplateProcessorRegistrar" init-method="init">
-		<property name="factory">
-			<bean class="org.springframework.extensions.webscripts.processor.ClojureTemplateProcessorFactoryy">
-				<property name="defaultEncoding"><value>UTF-8</value></property>
-				<property name="scriptProcessorFactory">
-					<bean class="org.springframework.extensions.webscripts.processor.ClojureScriptProcessorFactoryy" />
-				</property>
-			</bean>
-		</property>
-	</bean>
-	-->
 
 </beans>
