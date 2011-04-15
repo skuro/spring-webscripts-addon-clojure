@@ -22,7 +22,7 @@
 
         <!-- SERVER ON A REMOTE HOST -->
         <sonar.host.url>http://dev.skuro.tk:9000</sonar.host.url>
-		<spring.surf.version>1.0.0.CI-SNAPSHOT</spring.surf.version>
+		<spring.surf.version>1.0.0.M3</spring.surf.version>
     </properties>
 
     <dependencies>
