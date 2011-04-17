@@ -6,7 +6,7 @@
   []
   
   ws/WebScript
-  (eval [_ model]
+  (run [_ model]
        (assoc (into {}  model) "clojureVal" "SUCCESS")))
 
 (TestWebScript.)

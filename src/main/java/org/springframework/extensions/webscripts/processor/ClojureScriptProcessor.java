@@ -67,12 +67,12 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
         log.debug("Executing Clojure script");
         log.debug ("This line is to get rid of an IDEA warning: " + out);
 
+		this.addProcessorModelExtensions(model);
 
 		try
         {
             WebScript script = (WebScript)clojure.lang.Compiler.load(new InputStreamReader(is));
-			Map<String, Object> cljModel = (Map)script.eval(model);
-			setClojureViewModel(cljModel, model);
+			Map<String, Object> cljModel = (Map)script.run(model);
 
             return cljModel;
         }
@@ -81,18 +81,6 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
             throw new ScriptException("Error executing Clojure script", exception);
         }
     }
-
-	/**
-	 * Adds the resulting model from Clojure to the view model
-	 * @param cljModel View model resulting from Clojure execution
-	 * @param model Full web script model
-	 */
-	private void setClojureViewModel(Map<String, Object> cljModel, Map<String, Object> model)
-	{
-		// TODO: verify that nothing more than updating the 'model' entry is needed here
-		Map<String, Object> viewModel = (Map<String, Object>)model.get("model");
-		viewModel.putAll(cljModel);
-	}
 
     /* (non-Javadoc)
     * @see org.springframework.extensions.webscripts.ScriptProcessor#findScript(java.lang.String)
