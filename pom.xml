@@ -27,7 +27,12 @@
 
     <dependencies>
 
-        <!-- Web Scripts -->
+        <!-- Spring Surf and Web Scripts -->
+		<dependency>
+            <groupId>org.springframework.extensions.surf</groupId>
+            <artifactId>spring-surf</artifactId>
+            <version>${spring.surf.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.extensions.surf</groupId>
             <artifactId>spring-webscripts</artifactId>
