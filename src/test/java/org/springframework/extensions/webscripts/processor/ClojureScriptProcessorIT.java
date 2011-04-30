@@ -51,4 +51,12 @@ public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest
     {
     	sendRequest(new GetRequest("/test/clojure1"), 200, "VALUE: SUCCESS");
     }
+
+	/**
+	 * WithArgs - Getting args from the query string
+	 */
+	public void testWithArgs() throws IOException
+	{
+		sendRequest(new GetRequest("/test/withargs/1?b=2"), 200, "VALUE: 3");
+	}
 }

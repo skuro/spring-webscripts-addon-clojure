@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Clojure Test -- with arguments</shortname>
+  <description>Clojure Test -- with arguments</description>
+  <format>argument</format>
+  <url>/test/withargs/{a}?b={b}</url>
+  <authentication>none</authentication>
+  <transaction>required</transaction>
+</webscript>
