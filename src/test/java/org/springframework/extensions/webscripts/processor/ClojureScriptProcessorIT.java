@@ -21,6 +21,7 @@ package org.springframework.extensions.webscripts.processor;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.Test;
 import org.springframework.extensions.webscripts.AbstractWebScriptServerTest;
 import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
 
@@ -29,7 +30,7 @@ import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
  * 
  * @author muzquiano
  */
-public class ClojureScriptProcessorIntegrationTest extends AbstractWebScriptServerTest
+public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest
 {
     @Override
 	public ArrayList<String> getConfigLocations()
@@ -50,19 +51,4 @@ public class ClojureScriptProcessorIntegrationTest extends AbstractWebScriptServ
     {
     	sendRequest(new GetRequest("/test/clojure1"), 200, "VALUE: SUCCESS");
     }
-
-    public void testClojure2() throws IOException
-    {
-
-    }
-
-    /**
-     * Groovy2 - Sudoko Solver Test
-     * 
-     * @throws Exception
-     */
-//    public void testGroovy2() throws Exception
-//    {
-//    	sendRequest(new GetRequest("/test/clojure2"), 200, "284375169639218457571964382152496873348752916796831245967143528813527694425689731");
-//    }
 }

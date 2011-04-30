@@ -7,6 +7,6 @@
   
   ws/WebScript
   (run [_ model]
-       (assoc (into {}  model) "clojureVal" "SUCCESS")))
+       (ws/return model {"clojureVal" "SUCCESS"})))
 
 (TestWebScript.)
