@@ -12,4 +12,9 @@
 		</property>
 	</bean>
 
+	<bean id="webscripts.scriptprocessor.clojure" class="org.springframework.extensions.webscripts.processor.ClojureScriptProcessor">
+      <property name="searchPath" ref="webscripts.searchpath" />
+      <property name="scriptProcessorRegistry" ref="webscripts.web.scriptregistry" />
+   </bean>
+
 </beans>
