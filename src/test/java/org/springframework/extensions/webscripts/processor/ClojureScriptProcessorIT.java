@@ -3,8 +3,10 @@ package org.springframework.extensions.webscripts.processor;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.extensions.webscripts.AbstractWebScriptServerTest;
+import org.springframework.extensions.webscripts.TestWebScriptServer;
 import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
 
 /**
@@ -19,7 +21,7 @@ public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest
 	{
 		ArrayList<String> list = super.getConfigLocations();
 		
-		list.add("classpath:org/springframework/extensions/webscripts/clojure-webscripts-context.xml");
+		list.add("classpath:org/springframework/extensions/clj/webscripts/clojure-webscripts-context.xml");
 		
 		return list;
 	}
@@ -40,5 +42,14 @@ public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest
 	public void testWithArgs() throws IOException
 	{
 		sendRequest(new GetRequest("/test/withargs/1?b=2"), 200, "VALUE: 3");
+	}
+
+	@Ignore("The current spring web script test classes don't pass an output stream -> NPE")
+	public void testWithOutput() throws IOException {
+		GetRequest req = new GetRequest("/test/without");
+		TestWebScriptServer.Response res = sendRequest(req, 200, "VALUE: SUCCESS");
+		byte[] content = res.getContentAsByteArray();
+		assertNotNull("failed to retrieve content", content);
+		assertEquals("streamed content", new String(content, "UTF-8"));
 	}
 }

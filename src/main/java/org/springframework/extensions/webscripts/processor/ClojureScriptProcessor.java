@@ -54,7 +54,7 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor
 		try
         {
             WebScript script = (WebScript)clojure.lang.Compiler.load(new InputStreamReader(is));
-			Map<String, Object> cljModel = (Map)script.run(model);
+			Map<String, Object> cljModel = (Map)script.run(is, out, model);
 
             return cljModel;
         }

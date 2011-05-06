@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Clojure Test -- with streamed output</shortname>
+  <description>Clojure Test -- with streamed output</description>
+  <format>argument</format>
+  <url>/test/without</url>
+  <authentication>none</authentication>
+  <transaction>required</transaction>
+</webscript>

@@ -14,6 +14,7 @@
   ws/WebScript
   (run
    [_ in out model]
-   (ws/return model {:result (calc (merge (ws/template-args model) (ws/args model)))})))
+   (.write out "streamed content")
+   (ws/return  model {"clojureVal" "SUCCESS"})))
 
 (TestWebScript.)

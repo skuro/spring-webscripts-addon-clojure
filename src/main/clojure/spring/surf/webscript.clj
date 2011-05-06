@@ -1,8 +1,9 @@
-(ns spring.surf.webscript)
+(ns spring.surf.webscript
+  (:import [java.io InputStream Writer]))
 
 (defprotocol WebScript
   "Basic interface for a WebScript"
-  (run [this model] "Run the webscript and return the model"))
+  (run [this ^InputStream in ^Writer out model] "Run the webscript and return the model"))
 
 (defn- k2s
   "Returns a map ensuring that keys are all Strings and not clojure keywords"

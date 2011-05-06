@@ -6,7 +6,7 @@
   []
   
   ws/WebScript
-  (run [_ model]
+  (run [_ in out model]
        (ws/return model {"clojureVal" "SUCCESS"})))
 
 (TestWebScript.)
