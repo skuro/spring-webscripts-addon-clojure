@@ -16,13 +16,7 @@
     </parent>
 
     <properties>
-        <sonar.jdbc.url>jdbc:derby://dev.skuro.tk:9001/sonar</sonar.jdbc.url>
-        <sonar.jdbc.username>sonar</sonar.jdbc.username>
-        <sonar.jdbc.password>sonar</sonar.jdbc.password>
-
-        <!-- SERVER ON A REMOTE HOST -->
-        <sonar.host.url>http://dev.skuro.tk:9000</sonar.host.url>
-		<spring.surf.version>1.0.0.CI-SNAPSHOT</spring.surf.version>
+        <spring.surf.version>1.0.0.CI-SNAPSHOT</spring.surf.version>
     </properties>
 
     <dependencies>
