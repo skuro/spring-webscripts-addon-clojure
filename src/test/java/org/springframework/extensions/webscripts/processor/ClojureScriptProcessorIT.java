@@ -29,8 +29,9 @@ public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest
     /**
      * Clojure1 - Simple Response Test
      * 
-     * @throws IOException if Bad Thingsª happen
+     * @throws IOException if Bad Thingsï¿½ happen
      */
+    @Test
     public void testClojure1() throws IOException
     {
     	sendRequest(new GetRequest("/test/clojure1"), 200, "VALUE: SUCCESS");
@@ -39,17 +40,18 @@ public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest
 	/**
 	 * WithArgs - Getting args from the query string
 	 */
+    @Test
 	public void testWithArgs() throws IOException
 	{
 		sendRequest(new GetRequest("/test/withargs/1?b=2"), 200, "VALUE: 3");
 	}
 
-	@Ignore("The current spring web script test classes don't pass an output stream -> NPE")
-	public void testWithOutput() throws IOException {
-		GetRequest req = new GetRequest("/test/without");
-		TestWebScriptServer.Response res = sendRequest(req, 200, "VALUE: SUCCESS");
-		byte[] content = res.getContentAsByteArray();
-		assertNotNull("failed to retrieve content", content);
-		assertEquals("streamed content", new String(content, "UTF-8"));
-	}
+//	@Ignore("The current spring web script test classes don't pass an output stream -> NPE")
+//	public void testWithOutput() throws IOException {
+//		GetRequest req = new GetRequest("/test/without");
+//		TestWebScriptServer.Response res = sendRequest(req, 200, "VALUE: SUCCESS");
+//		byte[] content = res.getContentAsByteArray();
+//		assertNotNull("failed to retrieve content", content);
+//		assertEquals("streamed content", new String(content, "UTF-8"));
+//	}
 }
