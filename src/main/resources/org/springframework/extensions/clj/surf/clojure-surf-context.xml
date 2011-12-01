@@ -5,11 +5,12 @@
            http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<!-- Register the Clojure script processor -->
-	<bean id="webframework.registrar.clojurescriptprocessor" class="org.springframework.extensions.surf.ScriptProcessorRegistrar" init-method="init">
-		<property name="factory">
-			<bean class="org.springframework.extensions.webscripts.processor.ClojureScriptProcessorFactory" />
-		</property>
-	</bean>
+    <!-- Register the Clojure script processor -->
+    <bean id="webframework.registrar.clojurescriptprocessor"
+          class="org.springframework.extensions.surf.ScriptProcessorRegistrar" init-method="init">
+        <property name="factory">
+            <bean class="org.springframework.extensions.webscripts.processor.ClojureScriptProcessorFactory"/>
+        </property>
+    </bean>
 
 </beans>
