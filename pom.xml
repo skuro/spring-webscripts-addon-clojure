@@ -4,7 +4,7 @@
     <groupId>it.sk.spring.surf.clojure</groupId>
     <artifactId>spring-webscripts-addon-clojure</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-alpha2</version>
+    <version>1.0-SNAPSHOT</version>
     <name>spring-webscripts-addon-clojure</name>
     <url>http://skuro.tk</url>
 
@@ -21,7 +21,6 @@
     <scm>
         <connection>scm:git:git://github.com/skuro/spring-webscripts-addon-clojure.git</connection>
         <developerConnection>scm:git:git@github.com:skuro/spring-webscripts-addon-clojure.git</developerConnection>
-        <tag>1.0-alpha</tag>
         <url>https://github.com/skuro/spring-webscripts-addon-clojure</url>
     </scm>
 
@@ -37,6 +36,13 @@
     </repositories>
 
     <dependencies>
+        <!-- https://jira.springsource.org/browse/SESURF-99 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Spring Surf and Web Scripts -->
         <dependency>
             <groupId>org.springframework.extensions.surf</groupId>
@@ -87,7 +93,6 @@
             <version>1.3.3</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
