@@ -37,12 +37,6 @@
     </repositories>
 
 	<dependencies>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
 		<!-- Spring Surf and Web Scripts -->
 		<dependency>
 			<groupId>org.springframework.extensions.surf</groupId>
