@@ -10,22 +10,19 @@ import org.springframework.extensions.webscripts.ScriptProcessorFactory;
 /**
  * @author Carlo Sciolla &lt;skuro@skuro.tk&gt;
  */
-public class ClojureScriptProcessorFactory implements ScriptProcessorFactory, ApplicationContextAware
-{
-	private static final Log logger = LogFactory.getLog(ClojureScriptProcessorFactory.class);
-	
-	protected ApplicationContext applicationContext = null;
-	
-	public void setApplicationContext(ApplicationContext applicationContext)
-	{
-		this.applicationContext = applicationContext;
-	}
-		
-	/* (non-Javadoc)
-	 * @see org.springframework.extensions.webscripts.ScriptProcessorFactory#newInstance()
-	 */
-	public ScriptProcessor newInstance()
-	{
-		return new ClojureScriptProcessor();
-	}
+public class ClojureScriptProcessorFactory implements ScriptProcessorFactory, ApplicationContextAware {
+    private static final Log LOGGER = LogFactory.getLog(ClojureScriptProcessorFactory.class);
+
+    protected ApplicationContext applicationContext = null;
+
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
+    /* (non-Javadoc)
+      * @see org.springframework.extensions.webscripts.ScriptProcessorFactory#newInstance()
+      */
+    public ScriptProcessor newInstance() {
+        return new ClojureScriptProcessor();
+    }
 }

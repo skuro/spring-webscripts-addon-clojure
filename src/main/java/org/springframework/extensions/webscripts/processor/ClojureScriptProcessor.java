@@ -18,7 +18,8 @@ import spring.surf.webscript.WebScript;
 public class ClojureScriptProcessor extends AbstractScriptProcessor {
     private static final Log log = LogFactory.getLog(ClojureScriptProcessor.class);
 
-    private Map<String, WebScript> compiledWebScripts = Collections.synchronizedMap(new HashMap<String, WebScript>());
+    private final Map<String, WebScript> compiledWebScripts =
+            Collections.synchronizedMap(new HashMap<String,WebScript>());
 
     /* (non-Javadoc)
     * @see org.springframework.extensions.surf.core.processor.Processor#getExtension()
@@ -52,8 +53,7 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor {
         this.addProcessorModelExtensions(model);
 
         try {
-            WebScript script = (WebScript) clojure.lang.Compiler.load(new InputStreamReader(is));
-            return script;
+            return (WebScript) clojure.lang.Compiler.load(new InputStreamReader(is));
         } catch (Exception exception) {
             throw new ScriptException("Error executing Clojure script", exception);
         }
