@@ -18,7 +18,7 @@ import spring.surf.webscript.WebScript;
 public class ClojureScriptProcessor extends AbstractScriptProcessor {
     private static final Log log = LogFactory.getLog(ClojureScriptProcessor.class);
 
-    private final Map<String, WebScript> compiledWebScripts =
+    private Map<String, WebScript> compiledWebScripts =
             Collections.synchronizedMap(new HashMap<String,WebScript>());
 
     /* (non-Javadoc)
@@ -97,7 +97,7 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor {
             throw new ScriptException("Cannot compile Clojure web script at path " + path);
         }
 
-        synchronized (this.compiledWebScripts) {
+        synchronized (this) {
             if (log.isDebugEnabled()) {
                 log.debug("Caching Clojure webscript at path " + path);
             }
@@ -121,5 +121,6 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor {
 
     public void reset() {
         init();
+        this.compiledWebScripts = Collections.synchronizedMap(new HashMap<String,WebScript>());
     }
 }
