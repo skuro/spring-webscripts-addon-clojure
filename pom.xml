@@ -6,7 +6,8 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>spring-webscripts-addon-clojure</name>
-    <url>http://skuro.tk</url>
+    <url>https://github.com/skuro/spring-webscripts-addon-clojure/</url>
+    <description>Support Clojure controllers for Spring Surf applications</description>
 
     <parent>
         <groupId>org.springframework.extensions.surf</groupId>
@@ -23,6 +24,35 @@
         <developerConnection>scm:git:git@github.com:skuro/spring-webscripts-addon-clojure.git</developerConnection>
         <url>https://github.com/skuro/spring-webscripts-addon-clojure</url>
     </scm>
+
+    <licenses>
+        <license>
+            <url>http://www.opensource.org/licenses/MIT</url>
+            <name>MIT License</name>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>skuro</id>
+            <name>Carlo Sciolla</name>
+            <url>http://skuro.tk</url>
+            <email>skuro@skuro.tk</email>
+            <roles>
+                <role>Original Author</role>
+                <role>Maintainer</role>
+                <role>Contributor</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>deas</id>
+            <name>Andreas Steffan</name>
+            <url>http://www.contentreich.de/</url>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+        </developer>
+    </developers>
 
     <repositories>
         <repository>
