@@ -13,6 +13,9 @@ import org.springframework.extensions.webscripts.ScriptContent;
 import spring.surf.webscript.WebScript;
 
 /**
+ * Loads Clojure script controllers from an {@link InputStream} and memoizes
+ * the compiled {@link WebScript} instance
+ *
  * @author Carlo Sciolla &lt;skuro@skuro.tk&gt;
  */
 public class ClojureScriptProcessor extends AbstractScriptProcessor {
