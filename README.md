@@ -12,7 +12,16 @@ for your Spring Surf web scripts.
 Usage
 =====
 
-In order to bootstrap the Clojure script processor you might just `<import resource="classpath:org/springframework/extensions/clj/webscripts/clojure-webscripts-context.xml">` in your application context.
+In order to bootstrap the Clojure script processor you just:
+
+    <import resource="classpath:org/springframework/extensions/clj/webscripts/clojure-webscripts-context.xml" />`
+
+in your application context.
 
 Your clojure web scripts must return an instance of a concrete WebScript implementation. Its `run` method will be executed by the processor and the result passed to the view processor.
 Look at the [test webscripts](https://github.com/skuro/spring-webscripts-addon-clojure/tree/master/src/test/resources/webscripts/test) if your're looking for an example or a starting point.
+
+Project info
+============
+
+[![Build Status](https://secure.travis-ci.org/skuro/spring-webscripts-addon-clojure.png)](http://travis-ci.org/skuro/spring-webscripts-addon-clojure.png)
