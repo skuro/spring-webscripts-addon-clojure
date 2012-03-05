@@ -10,12 +10,12 @@ package spring.surf.webscript;
  */
 public interface WebScript {
     /**
-     * Runs the WebScript
+     * Runs the WebScript and stores the result by updating and returning the model
      *
-     * @param inputStream
-     * @param writer
-     * @param model
-     * @return
+     * @param inputStream A stream to the clojure web script sources
+     * @param writer The output writer
+     * @param model The model where to put results
+     * @return The updated model
      */
     // TODO better documentation and type safety. Or just migrate everything to pure Clojure
     Object run(Object inputStream, Object writer, Object model);
