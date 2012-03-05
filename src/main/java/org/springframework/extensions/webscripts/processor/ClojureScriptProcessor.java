@@ -24,18 +24,18 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor {
     private Map<String, WebScript> compiledWebScripts =
             Collections.synchronizedMap(new HashMap<String,WebScript>());
 
-    /* (non-Javadoc)
-    * @see org.springframework.extensions.surf.core.processor.Processor#getExtension()
-    */
-
+    /**
+     * {@inheritDoc}
+     * @return "clj"
+     */
     public String getExtension() {
         return "clj";
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.extensions.surf.core.processor.Processor#getName()
+    /**
+     * {@inheritDoc}
+     * @return "clojure"
      */
-
     public String getName() {
         return "clojure";
     }
@@ -62,17 +62,16 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor {
         }
     }
 
-    /* (non-Javadoc)
-    * @see org.springframework.extensions.webscripts.ScriptProcessor#findScript(java.lang.String)
-    */
-
+    /**
+     * {@inheritDoc}
+     */
     public ScriptContent findScript(String path) {
         // TODO: maybe check path against (ns)?
         return getScriptLoader().getScript(path);
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.extensions.webscripts.ScriptProcessor#executeScript(java.lang.String, java.util.Map)
+    /**
+     * {@inheritDoc}
      */
     public Object executeScript(String path, Map<String, Object> model) {
         ScriptContent scriptContent = findScript(path);
@@ -83,10 +82,9 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor {
         return executeScript(scriptContent, model);
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.extensions.webscripts.ScriptProcessor#executeScript(org.springframework.extensions.webscripts.ScriptContent, java.util.Map)
+    /**
+     * {@inheritDoc}
      */
-
     public Object executeScript(ScriptContent scriptContent, Map<String, Object> model) {
         String path  = scriptContent.getPath();
         WebScript webscript = this.compiledWebScripts.get(path);
@@ -110,18 +108,16 @@ public class ClojureScriptProcessor extends AbstractScriptProcessor {
         return webscript.run(scriptContent.getInputStream(), null, model);
     }
 
-    /* (non-Javadoc)
-    * @see org.springframework.extensions.webscripts.ScriptProcessor#unwrapValue(java.lang.Object)
-    */
-
+    /**
+     * {@inheritDoc}
+     */
     public Object unwrapValue(Object value) {
         return value;
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.extensions.webscripts.ScriptProcessor#reset()
+    /**
+     * {@inheritDoc}
      */
-
     public void reset() {
         init();
         this.compiledWebScripts = Collections.synchronizedMap(new HashMap<String,WebScript>());
