@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>it.sk.spring.surf.clojure</groupId>
     <artifactId>spring-webscripts-addon-clojure</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-beta1</version>
     <name>spring-webscripts-addon-clojure</name>
     <url>https://github.com/skuro/spring-webscripts-addon-clojure/</url>
     <description>Support Clojure controllers for Spring Surf applications</description>
@@ -164,7 +163,7 @@
                                     </goals>
                                 </pluginExecutionFilter>
                                 <action>
-                                    <execute></execute>
+                                    <execute />
                                 </action>
                             </pluginExecution>
                         </pluginExecutions>
