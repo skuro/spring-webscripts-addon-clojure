@@ -3,7 +3,7 @@
     <groupId>tk.skuro.spring.surf.clojure</groupId>
     <artifactId>spring-webscripts-addon-clojure</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-alpha1</version>
+    <version>1.0-SNAPSHOT</version>
     <name>spring-webscripts-addon-clojure</name>
     <url>https://github.com/skuro/spring-webscripts-addon-clojure/</url>
     <description>Support Clojure controllers for Spring Surf applications</description>
