@@ -19,19 +19,18 @@
 
 package org.springframework.extensions.webscripts.processor;
 
-import org.junit.Test;
-import org.springframework.extensions.webscripts.AbstractWebScriptServerTest;
-import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.springframework.extensions.webscripts.AbstractWebScriptServerTest;
+import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
 
 /**
  * Unit tests for Clojure Script Processor
  *
  * @author Carlo Sciolla &lt;skuro@skuro.tk&gt;
  */
-public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest {
+public class ClojureScriptProcessorITest extends AbstractWebScriptServerTest {
     @Override
     public ArrayList<String> getConfigLocations() {
         ArrayList<String> list = super.getConfigLocations();
@@ -46,7 +45,6 @@ public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest {
      *
      * @throws IOException if Bad Things� happen
      */
-    @Test
     public void testClojure1() throws IOException {
         sendRequest(new GetRequest("/test/clojure1"), 200, "VALUE: SUCCESS");
     }
@@ -54,7 +52,6 @@ public class ClojureScriptProcessorIT extends AbstractWebScriptServerTest {
     /**
      * WithArgs - Getting args from the query string
      */
-    @Test
     public void testWithArgs() throws IOException {
         sendRequest(new GetRequest("/test/withargs/1?b=2"), 200, "VALUE: 3");
     }
