@@ -1,6 +1,7 @@
 ;; NOTE: any ns form would be ignored
 
 (use '[spring.surf.webscript :as ws])
+(import spring.surf.webscript.WebScript)
 
 (defn calc
   "Sample calculation"
@@ -11,7 +12,7 @@
 (defrecord TestWebScript
   []
   
-  ws/WebScript
+  WebScript
   (run
    [_ in out model]
    (ws/return model {:result (calc (merge (ws/template-args model) (ws/args model)))})))

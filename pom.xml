@@ -65,6 +65,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- https://jira.springsource.org/browse/SESURF-99 -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -92,6 +98,12 @@
             <artifactId>spring-webscripts</artifactId>
             <version>${spring.surf.version}</version>
             <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-mock</artifactId>
+            <version>2.0.8</version>
             <scope>test</scope>
         </dependency>
 
