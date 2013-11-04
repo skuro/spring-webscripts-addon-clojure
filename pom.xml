@@ -15,7 +15,7 @@
     </parent>
 
     <properties>
-        <spring.surf.version>1.0.0</spring.surf.version>
+        <spring.surf.version>1.2.0</spring.surf.version>
     </properties>
 
     <scm>
