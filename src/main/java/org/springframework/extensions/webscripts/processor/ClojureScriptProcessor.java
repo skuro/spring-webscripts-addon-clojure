@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import clojure.lang.RT;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.surf.core.scripts.ScriptException;
@@ -38,6 +39,12 @@ import spring.surf.webscript.WebScript;
  * @author Carlo Sciolla &lt;skuro@skuro.tk&gt;
  */
 public class ClojureScriptProcessor extends AbstractScriptProcessor {
+
+    static {
+        // needed as clojure.lang.Compiler needs RT to be fully loaded beforehand
+        RT.list();
+    }
+
     private static final Log log = LogFactory.getLog(ClojureScriptProcessor.class);
 
     private Map<String, WebScript> compiledWebScripts =
