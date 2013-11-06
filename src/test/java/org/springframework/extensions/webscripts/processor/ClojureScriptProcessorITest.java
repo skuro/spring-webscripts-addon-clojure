@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import org.springframework.extensions.webscripts.AbstractWebScriptServerTest;
 import org.springframework.extensions.webscripts.TestWebScriptServer.GetRequest;
+import org.springframework.extensions.webscripts.TestWebScriptServer.PostRequest;
 
 /**
  * Unit tests for Clojure Script Processor
@@ -54,6 +55,13 @@ public class ClojureScriptProcessorITest extends AbstractWebScriptServerTest {
      */
     public void testWithArgs() throws IOException {
         sendRequest(new GetRequest("/test/withargs/1?b=2"), 200, "VALUE: 3");
+    }
+
+    /**
+     * Body echo - receives a POST and echoes the body back
+     */
+    public void testPostEcho() throws IOException {
+        sendRequest(new PostRequest("/test/bodypost", "boo", "text/text"), 200, "VALUE: boo");
     }
 
 //	@Ignore("The current spring web script test classes don't pass an output stream -> NPE")
