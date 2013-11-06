@@ -18,6 +18,11 @@
   [model]
   (s2k (.get model "args")))
 
+(defn req-body-str
+  "Returns the HTTP request body as a String"
+  [model]
+  (-> model (.get "requestbody") (.getContent)))
+
 (defn template-args
   "Fetches all the template arguments from the webscript UrlModel"
   [model]
