@@ -1,4 +1,4 @@
-;; NOTE: any ns form would be ignored
+(ns test.with.args)
 
 (use '[spring.surf.webscript :as ws])
 (import spring.surf.webscript.WebScript)
